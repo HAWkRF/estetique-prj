@@ -291,6 +291,21 @@ export default {
             },300)
         }
       }
+    },
+    getAnchors() {
+      const anchors = document.querySelectorAll('a[href*="#"]')
+        for (let anchor of anchors) {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault()
+            
+            const blockID = anchor.getAttribute('href')
+            
+            document.querySelector('' + blockID).scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            })
+          })
+        }
     }
   },
   computed: {
@@ -318,6 +333,7 @@ export default {
     };
     const observer = new IntersectionObserver(callback, options);
     observer.observe(this.$refs.observer);
+    this.getAnchors();
   },
   watch: {
     activeSlider() {
