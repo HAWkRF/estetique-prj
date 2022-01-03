@@ -289,12 +289,17 @@ export default {
       service.isOpen = !service.isOpen;
     },
     getCircleState() {
+      let start = Date.now();
+      let times = []
       if (this.circleState <= 0) {
         for (let i = 0; i < 366; i += 0.2) {
             setTimeout(() => {
-              this.circleState = i;
-              this.currentYear = (i / 50).toFixed(0);
-            },300)
+              times.push(Date.now() - start);
+              if (start + 350 < Date.now()) {
+                this.circleState = i;
+                this.currentYear = (i / 50).toFixed(0);
+              }
+            }, 400)
         }
       }
     },
