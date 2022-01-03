@@ -204,9 +204,10 @@ import pepsiIcon from './assets/img/pepsi-logo.png';
 import fiveIcon from './assets/img/fiveroskhka-icon.png';
 import sberIcon from './assets/img/sber-icon.png';
 import ServicesItem from "./assets/components/services-item/ServicesItem";
+import VueGallerySlideshow from 'vue-gallery-slideshow'
 export default {
   name: "App",
-  components: {ServicesItem, SliderItem},
+  components: {ServicesItem, SliderItem,}, VueGallerySlideshow,
   data() {
     return {
       arrowIcon,
