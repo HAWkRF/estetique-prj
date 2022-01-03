@@ -75,7 +75,12 @@
         <div class="container" style="display: flex; justify-content: space-between">
             <div class="title">Портфолио</div>
             <div class="portfolio__slider">
-                <SliderItem v-for="slide in getCurrentSliders()" :key="slide.id" :activeSlider="activeSlider" :title="slide.title" :descr="slide.descr" :icon="slide.icon" />
+              <vue-chocolat v-for="slide in getCurrentSliders()" :key="slide.id">
+                  <a :href="slide.icon" style="text-decoration: none;">
+                  <SliderItem :activeSlider="activeSlider" :title="slide.title" :descr="slide.descr" :icon="slide.icon" />
+                </a>
+                </vue-chocolat>
+
               <div class="separator">
                 <div class="separator__item">
                   <div class="separator__item__arrow left" @click="setPrevActiveSlider">
@@ -204,10 +209,10 @@ import pepsiIcon from './assets/img/pepsi-logo.png';
 import fiveIcon from './assets/img/fiveroskhka-icon.png';
 import sberIcon from './assets/img/sber-icon.png';
 import ServicesItem from "./assets/components/services-item/ServicesItem";
-import VueGallerySlideshow from 'vue-gallery-slideshow'
+import vueChocolat from 'vue-chocolat'
 export default {
   name: "App",
-  components: {ServicesItem, SliderItem,}, VueGallerySlideshow,
+  components: {ServicesItem, SliderItem,}, 'vue-chocolat': vueChocolat,
   data() {
     return {
       arrowIcon,
@@ -618,10 +623,13 @@ export default {
   user-select: none;
   text-decoration: none;
   &:hover {
-    background-color: #b51111;
+    transition: 1.9s;
+    background-color: #fff;
+    color: #b51111;
   }
   &:active {
-    background-color: #9f1010;
+    background-color: #fff;
+    color: #9f1010;
   }
 
   @media (max-width: 575px) {
