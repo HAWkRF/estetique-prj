@@ -4,7 +4,7 @@
         <div class="container" style="display: flex; justify-content: space-between">
 
         <div class="slider">
-            <img class="slider__item" :src="getCurrentSlide()" alt="">
+            <img class="slider__item" :src="getCurrentSlide()" alt="" style="transition: 0.05s;">
         </div>
         
         <nav class="nav">
@@ -264,7 +264,7 @@ export default {
   methods: {
     nextSlide() {
       if (this.navActive < 2) {
-        this.navActive += 1;
+        setTimeout(() => this.navActive += 1, 1000)
       }
     },
     prevSlide() {
@@ -397,6 +397,7 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: 3s;
   }
 
   @media (max-width: 991px) {
