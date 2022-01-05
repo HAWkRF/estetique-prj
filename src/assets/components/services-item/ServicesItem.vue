@@ -4,16 +4,20 @@
       <div>{{title}}</div>
       <div class="services-item__title__icon">{{isOpen ? '-' : '+'}}</div>
     </div>
-    <ul v-show="isOpen" class="services-item__descr">
-      <li class="services-item__descr__item">{{sortDescr(0)}}</li>
-      <li class="services-item__descr__item">{{sortDescr(1)}}</li>
-      <li class="services-item__descr__item">{{sortDescr(2)}}</li>
-      <li class="services-item__descr__item">{{sortDescr(3)}}</li>
-      <li v-show="sortDescr(4) === '' ? null : sortDescr(4) " class="services-item__descr__item">{{sortDescr(4)}}</li>
-      <li v-show="sortDescr(5) === '' ? null : sortDescr(5) " class="services-item__descr__item">{{sortDescr(5)}}</li>
-    </ul>
+    <transition-group>
+      <ul v-show="isOpen" class="services-item__descr">
+        <li class="services-item__descr__item">{{sortDescr(0)}}</li>
+        <li class="services-item__descr__item">{{sortDescr(1)}}</li>
+        <li class="services-item__descr__item">{{sortDescr(2)}}</li>
+        <li class="services-item__descr__item">{{sortDescr(3)}}</li>
+        <li v-show="sortDescr(4) === '' ? null : sortDescr(4) " class="services-item__descr__item">{{sortDescr(4)}}</li>
+        <li v-show="sortDescr(5) === '' ? null : sortDescr(5) " class="services-item__descr__item">{{sortDescr(5)}}</li>
+      </ul>
+    </transition-group>
   </div>
 </template>
+
+
 
 <script>
 import cursorIcon from './img/cursor.png';
@@ -75,6 +79,7 @@ name: "ServicesItem",
       font-size: 18px;
       color: #fff;
       margin: 40px 0;
+      transition: all 3s;
       &__item {
         margin: 0 0 12px 0;
         &:last-child {

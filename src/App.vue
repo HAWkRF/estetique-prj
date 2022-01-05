@@ -317,8 +317,32 @@ export default {
             })
           })
         }
-    }
+    },
+
+
+//     _boot() {
+//     var btn = document.querySelectorAll("services-item");
+//     btn.addEventListener('click', showServices);
+// },
+
+//   showServices(e) {
+// 		var dscr = document.querySelectorAll("services-item__descr");
+//     this.open = !this.open;
+//     if (!this.open) {
+//       e.target.
+//     }
+//     else {
+//     		e.target.className = dscr.className = "";
+//     }
+// } 
   },
+//   smthScrl(entry) {
+//     entry.forEach(change => {
+//     if (change.isIntersecting) {
+//       change.target.classList.add('el-show');
+//     }
+//   });
+// },
   computed: {
     classesNavMenu() {
         return  {
@@ -344,7 +368,23 @@ export default {
     };
     const observer = new IntersectionObserver(callback, options);
     observer.observe(this.$refs.observer);
+
     this.getAnchors();
+
+    // const optionsAbout = {
+    //    threshold: [0.5] 
+    // };
+    // let observerAbout = new IntersectionObserver(this.smthScrl(), optionsAbout);
+    // let elements = document.querySelectorAll('.about');
+    //     for (let elm of elements) {
+    //       observerAbout.observe(elm);
+    //   }
+
+    // const openMenu = document.querySelector('.services-item');
+    // openMenu.addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   openMenu.nextElementSibling.classList.toggle('&__descr')
+    // });
   },
   watch: {
     activeSlider() {
@@ -787,6 +827,7 @@ export default {
   justify-content: space-between;
   padding: 64px 0 164px 0;
   border-bottom: 1px solid #E4E4E4;
+  // opacity: 0;
 
   @media (max-width: 1199px) {
     padding: 100px 0 100px 0;
@@ -826,6 +867,12 @@ export default {
     }
   }
 }
+
+.about.el-show {
+  opacity: 1;
+  transition: all 1s;
+  }
+
 .stats {
   display: flex;
   justify-content: space-between;
