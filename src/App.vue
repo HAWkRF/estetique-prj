@@ -1154,7 +1154,7 @@ export default {
     font-size: 80px;
     color: #171719;
     z-index: -100;
-    animation: runString 2s linear infinite;
+    animation: runString 5s linear infinite;
 
     font-size: 80px;
 
