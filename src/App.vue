@@ -76,7 +76,7 @@
             <div class="title">Портфолио</div>
             <div class="portfolio__slider">
               <vue-chocolat v-for="slide in getCurrentSliders()" :key="slide.id">
-                  <a :href="slide.icon" style="text-decoration: none;">
+                  <a :href="slide.icon" target="_blank" style="text-decoration: none;">
                   <SliderItem :activeSlider="activeSlider" :title="slide.title" :descr="slide.descr" :icon="slide.icon" />
                 </a>
                 </vue-chocolat>
@@ -101,7 +101,7 @@
           <img :src=sliderSlideMobile6 alt="">
         </div>
       </section>
-      <section class="about" id="about-slide">
+      <section ref="about" class="about" id="about-slide">
         <div class="container" style="display: flex; justify-content: space-between">
 
         <div class="title" style="margin: 36px 0 0 0">Кто мы</div>
@@ -127,7 +127,7 @@
         </div>
         </div>
       </section>
-      <section class="customer" id="customer">
+      <section ref="customer" class="customer" id="customer">
         <div class="container" style="display: flex; justify-content: space-between">
           <div class="title" style="margin: 36px 0 0 0">Кто вы</div>
           <div class="customer__descr">
@@ -135,7 +135,7 @@
           </div>
         </div>
       </section>
-      <section class="partners " id="partners-slide">
+      <section ref="partners" class="partners " id="partners-slide">
         <div class="container" style="display: flex; justify-content: space-between">
         <div class="title">Наши клиенты</div>
         <div class="partners__block">
@@ -210,11 +210,15 @@ import fiveIcon from './assets/img/fiveroskhka-icon.png';
 import sberIcon from './assets/img/sber-icon.png';
 import ServicesItem from "./assets/components/services-item/ServicesItem";
 import vueChocolat from 'vue-chocolat'
+// import cursorWhite from './assets/img/cursor-white'
+// import cursorBlack from './assets/img/cursor-black'
 export default {
   name: "App",
   components: {ServicesItem, SliderItem,}, 'vue-chocolat': vueChocolat,
   data() {
     return {
+      // cursorWhite,
+      // cursorBlack,
       arrowIcon,
       navIcon,
       sliderIcon1,
@@ -318,31 +322,7 @@ export default {
           })
         }
     },
-
-
-//     _boot() {
-//     var btn = document.querySelectorAll("services-item");
-//     btn.addEventListener('click', showServices);
-// },
-
-//   showServices(e) {
-// 		var dscr = document.querySelectorAll("services-item__descr");
-//     this.open = !this.open;
-//     if (!this.open) {
-//       e.target.
-//     }
-//     else {
-//     		e.target.className = dscr.className = "";
-//     }
-// } 
   },
-//   smthScrl(entry) {
-//     entry.forEach(change => {
-//     if (change.isIntersecting) {
-//       change.target.classList.add('el-show');
-//     }
-//   });
-// },
   computed: {
     classesNavMenu() {
         return  {
@@ -356,6 +336,9 @@ export default {
       root: null,
       rootMargin: '0px',
       threshold: 1.0
+    }
+    const optionsAbout = {
+      threshold: 0.5
     }
     const someFn = () => {
       this.getCircleState();
@@ -371,20 +354,22 @@ export default {
 
     this.getAnchors();
 
-    // const optionsAbout = {
-    //    threshold: [0.5] 
-    // };
-    // let observerAbout = new IntersectionObserver(this.smthScrl(), optionsAbout);
-    // let elements = document.querySelectorAll('.about');
-    //     for (let elm of elements) {
-    //       observerAbout.observe(elm);
-    //   }
+    const funThreeBlocks = () => {
+      this.$refs.about.classList.add("el-show");
+      this.$refs.customer.classList.add("el-show");
+      this.$refs.partners.classList.add("el-show");
+    }
+    const callbackAbout = (entries) => {
+      if (entries[0].isIntersecting) {
+        funThreeBlocks();
+      }
+      return entries;
+    }
 
-    // const openMenu = document.querySelector('.services-item');
-    // openMenu.addEventListener('click', (e) => {
-    //   e.preventDefault();
-    //   openMenu.nextElementSibling.classList.toggle('&__descr')
-    // });
+    const observerThreeBlocks = new IntersectionObserver(callbackAbout, optionsAbout);
+    observerThreeBlocks.observe(this.$refs.about);
+    observerThreeBlocks.observe(this.$refs.customer);
+    observerThreeBlocks.observe(this.$refs.partners);
   },
   watch: {
     activeSlider() {
@@ -425,6 +410,7 @@ export default {
   display: flex;
   height: 850px;
   background: #171719;
+  cursor: url(../src/assets/img/cursor-white.svg), default;
 
   @media (max-width: 991px) {
     height: 700px;
@@ -750,6 +736,7 @@ export default {
   justify-content: space-between;
   padding: 150px 0;
   border-bottom: 1px solid #E4E4E4;
+  cursor: url(../src/assets/img/cursor-black.svg), default;
 
   
   .title {
@@ -827,7 +814,9 @@ export default {
   justify-content: space-between;
   padding: 64px 0 164px 0;
   border-bottom: 1px solid #E4E4E4;
-  // opacity: 0;
+  transform: translateY(20px);
+  cursor: url(../src/assets/img/cursor-black.svg), default;
+  opacity: 0;
 
   @media (max-width: 1199px) {
     padding: 100px 0 100px 0;
@@ -870,7 +859,8 @@ export default {
 
 .about.el-show {
   opacity: 1;
-  transition: all 1s;
+  transition: all 3s;
+  transform: translateY(20%);
   }
 
 .stats {
@@ -954,6 +944,8 @@ export default {
   padding-top: 100px;
   padding-bottom: 163px;
   border-bottom: 1px solid #E4E4E4;
+  cursor: url(../src/assets/img/cursor-black.svg), default;
+  opacity: 0;
 
   
   @media (max-width: 1199px) {
@@ -979,13 +971,19 @@ export default {
   }
 
    &__descr {
-    margin-left: 280px;
-    max-width: 586px;
+    // margin-left: 280px;
+    // max-width: 586px;
+
+    font-size: 18px;
+    width: 220px;
+    height: 140px;
+    line-height: 154%;
+    margin: 36px 0 0 170px;
 
     font-family: 'IBM Plex Mono', sans-serif;;
-    font-size: 25px;
-    line-height: 1;
-    color: #222222;
+    // font-size: 25px;
+    // line-height: 1;
+    // color: #222222;
 
     @media (max-width: 1199px) {
       margin-left: 60px;
@@ -1001,11 +999,19 @@ export default {
 
 }
 
+.customer.el-show {
+  opacity: 1;
+  transition: all 3s;
+  transform: translateY(20%);
+  }
+
 .partners {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 100px 0 200px 0;
+  cursor: url(../src/assets/img/cursor-black.svg), default;
+  opacity: 0;
 
   @media (max-width: 1199px) {
     padding: 100px 0 100px 0;
@@ -1089,6 +1095,12 @@ export default {
   }
 }
 
+.partners.el-show {
+  opacity: 1;
+  transition: all 3s;
+  transform: translateY(20%);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1139,6 +1151,7 @@ export default {
   align-items: center;
   padding: 200px 0;
   overflow-x: hidden;
+  cursor: url(../src/assets/img/cursor-black.svg), default;
 
   @media (max-width: 767px) {
     padding: 55px 0;
@@ -1207,6 +1220,7 @@ export default {
   align-items: center;
   padding: 39px 0 54px 0;
   background: #171719;
+  cursor: url(../src/assets/img/cursor-white.svg), default;
 
   @media (max-width: 575px) {
     height: 297px;
