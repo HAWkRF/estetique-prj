@@ -48,7 +48,8 @@ name: "ServicesItem",
   .services-item {
     padding: 30px 0;
     border-top: 1px solid #E4E4E4;
-    cursor: url(./img/cursor.png), default;
+    cursor: url("../../img/cursor-white.svg"), default;
+    // cursor: url(./img/cursor.png), default;
 
     @media (max-width: 575px) {
       padding: 6px 0;

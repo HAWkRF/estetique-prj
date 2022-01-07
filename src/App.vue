@@ -210,15 +210,11 @@ import fiveIcon from './assets/img/fiveroskhka-icon.png';
 import sberIcon from './assets/img/sber-icon.png';
 import ServicesItem from "./assets/components/services-item/ServicesItem";
 import vueChocolat from 'vue-chocolat'
-// import cursorWhite from './assets/img/cursor-white'
-// import cursorBlack from './assets/img/cursor-black'
 export default {
   name: "App",
   components: {ServicesItem, SliderItem,}, 'vue-chocolat': vueChocolat,
   data() {
     return {
-      // cursorWhite,
-      // cursorBlack,
       arrowIcon,
       navIcon,
       sliderIcon1,
